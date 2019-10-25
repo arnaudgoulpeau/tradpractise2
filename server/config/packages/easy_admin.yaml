@@ -1,0 +1,132 @@
+easy_admin:
+  site_name: 'Trad Practise'
+  design:
+    assets:
+      js:
+        - 'js/select2override.js'
+    menu:
+      #- { label: 'Front', route: 'search_practises' }
+      - { entity: 'Tune', params: { sortField: 'name', sortDirection: 'ASC' } }
+      - TuneFile
+      - TuneSet
+      - PractiseSession
+      - Technique
+      - TechniqueFile
+      - TuneType
+      - TuneFileType
+      - TechniqueType
+      - TechniqueFileType
+      - Tag
+      - User
+  list:
+    max_results: 50
+  entities:
+    PractiseSession:
+      class: App\Entity\PractiseSession
+    Technique:
+      class: App\Entity\Technique
+      list:
+        fields:
+          - name
+          - { property: 'exampleLink', template: 'admin/url.html.twig' }
+          - description
+          - techniqueType
+          - techniqueFiles
+
+    TechniqueFile:
+      class: App\Entity\TechniqueFile
+      list:
+        fields:
+          - name
+          - { property: 'link', template: 'admin/url.html.twig' }
+          - techniqueFileType
+          - technique
+          - { property: 'fileName', template: 'admin/fileLink.html.twig', base_path: "%app.path.tune_file_path%" }
+      form:
+        fields:
+          - name
+          - link
+          - techniqueFileType
+          - technique
+          - { property: 'file', type: 'vich_file' }
+    TechniqueFileType:
+      class: App\Entity\TechniqueFileType
+    TechniqueType:
+      class: App\Entity\TechniqueType
+      form:
+        fields:
+          - name
+    Tune:
+      class: App\Entity\Tune
+      list:
+        fields:
+          - name
+          - { property: 'linkTheSession', template: 'admin/url.html.twig', label: 'thesession' }
+          - key
+          - tuneType
+          - tuneFiles
+          - isStared
+          - tags
+          - { property: 'hasAbc', template: 'admin/boolean.html.twig' }
+          - { property: 'hasPartition', template: 'admin/boolean.html.twig' }
+          - { property: 'hasTuneSet', template: 'admin/boolean.html.twig' }
+        actions: ['getAbc']
+      form:
+        fields:
+          - name
+          - { property: 'linkTheSession', template: 'admin/url.html.twig' }
+          - key
+          - abc
+          - tuneType
+          - isStared
+          - tags
+    TuneFile:
+      class: App\Entity\TuneFile
+      list:
+        fields:
+          - name
+          - { property: 'link', template: 'admin/url.html.twig' }
+          - tuneFileType
+          - tune
+          - mandolinTabId
+          - { property: 'fileName', template: 'admin/fileLink.html.twig', base_path: "%app.path.tune_file_path%" }
+      form:
+        fields:
+          - name
+          - link
+          - tuneFileType
+          - tune
+          - mandolinTabId
+          - { property: 'file', type: 'vich_file' }
+    TuneFileType:
+      class: App\Entity\TuneFileType
+      list:
+        fields:
+          - name
+          - { property: 'fileName', template: 'admin/fileLink.html.twig', base_path: "%app.path.tune_file_path%" }
+      form:
+        fields:
+          - name
+          - { property: 'file', type: 'vich_file' }
+    TuneSet:
+      class: App\Entity\TuneSet
+      list:
+        fields:
+          - { property: 'tune1'}
+          - { property: 'tune2'}
+          - { property: 'tune3'}
+          - { property: 'tune4'}
+          - { property: 'tune5'}
+      form:
+        fields:
+          - tune1
+          - tune2
+          - tune3
+          - tune4
+          - tune5
+    TuneType:
+      class: App\Entity\TuneType
+    Tag:
+      class: App\Entity\Tag
+    User:
+      class: App\Entity\User
