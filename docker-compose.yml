@@ -30,7 +30,7 @@ services:
     container_name: musicpractisedev_front
     image: musicpractisefront
     volumes:
-      - './client/:/app'
+      - './front/:/app'
       - '/app/node_modules'
     ports:
       - '3001:3000'

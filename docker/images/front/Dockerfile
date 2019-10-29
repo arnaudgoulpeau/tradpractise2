@@ -11,7 +11,7 @@ RUN chmod +x /srv/init.sh
 ENV PATH /app/node_modules/.bin:$PATH
 
 # install and cache app dependencies
-COPY client/package.json /app/package.json
+COPY front/package.json /app/package.json
 RUN npm install --silent
 RUN npm install react-scripts@3.0.1 -g --silent
 
