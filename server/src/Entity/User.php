@@ -17,7 +17,7 @@ class User implements UserInterface
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $id;
+    private $id;
 
     /**
      * @var string
@@ -60,6 +60,14 @@ class User implements UserInterface
      * @ORM\Column(name="account_non_locked", type="boolean", nullable=false)
      */
     private $accountNonLocked;
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * @return array
