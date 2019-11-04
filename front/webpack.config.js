@@ -11,7 +11,37 @@ module.exports = {
             {
                 test: /\.jsx?$/,
                 loader: 'babel-loader'
-            }
+            },
+            {
+                test: /\.(sa|sc|c)ss$/,
+                use: ['style-loader', 'css-loader', 'sass-loader'],
+            },
+            {
+                test: /\.(png|jpe?g|gif|svg)$/,
+                exclude: [/font/, /fonts/],
+                loader: 'file-loader',
+                options: {
+                    name: './assets/images/[folder]/[name].[ext]',
+                    publicPath: '../../',
+                    /**
+                     * Note: Assets are loaded from the same path as the generated CSS-files
+                     *       Adjust publicPath{publicPath} accordingly if you change css paths
+                     */
+                },
+            },
+            {
+                test: /\.(eot|svg|ttf|woff2?|otf)$/,
+                exclude: [/img/, '/images/'],
+                loader: 'file-loader',
+                options: {
+                    name: './assets/fonts/[folder]/[name].[ext]',
+                    publicPath: '../../',
+                    /**
+                     * Note: Assets are loaded from the same path as the generated CSS-files
+                     *       Adjust publicPath{publicPath} accordingly if you change css paths
+                     */
+                },
+            },
         ]
     },
     resolve: {
